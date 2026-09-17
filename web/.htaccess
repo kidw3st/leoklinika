@@ -1,0 +1,89 @@
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule . index.php [L]
+
+#<Files *>
+#AuthType Basic
+#AuthName "Webmaster page"
+#require valid-user
+#AuthUserFile   /var/www/u2998720/data/www/yii2/web/.htpasswd
+#</Files>
+
+Redirect 301 /fotodinamicheskaya-terapiya-backup/ https://leoklinika.ru/
+Redirect 301 /priem-onkologa/diagnostika-mastopatii/ https://leoklinika.ru/
+Redirect 301 /priem-mammologa/ https://leoklinika.ru/services/otdelenie-konsultativnyh-priemov-vrachei/mammolog
+Redirect 301 /prajs-2-2/ https://leoklinika.ru/
+Redirect 301 /2025/11/10/nashi-vrachi-pobediteli-i-prizery-narodnoj-premii-prodoktorov-2025/ https://leoklinika.ru/
+Redirect 301 /ehsteticheskaya-ginekologiya/ https://leoklinika.ru/services/procedury/esteticheskaya-ginekologiya
+Redirect 301 /vtoroe-mnenie/ https://leoklinika.ru/services/otdelenie-konsultativnyh-priemov-vrachei/konsultaciya-vracha-vtoroe-mnenie
+Redirect 301 /glavnaja/nashi-speczialisty/ https://leoklinika.ru/members
+Redirect 301 /priem-psikhologa/ https://leoklinika.ru/
+Redirect 301 /kolposkopiya-shejki-matki/ https://leoklinika.ru/services/diagnostikа/diagnostika-patologii-sheiki-matki-i-vulvy-100
+Redirect 301 /zapis/ https://leoklinika.ru/
+#Redirect 301 /blog/ https://leoklinika.ru/
+Redirect 301 /contacts/ https://leoklinika.ru/
+Redirect 301 /priem-onkologa/dermatoskopiya/ hhttps://leoklinika.ru/services/otdelenie-konsultativnyh-priemov-vrachei/onkolog
+Redirect 301 /fotodinamicheskaya-terapiya/ https://leoklinika.ru/
+Redirect 301 /akcii/ https://leoklinika.ru/
+Redirect 301 /uslugi/ https://leoklinika.ru/
+Redirect 301 /2025/02/26/klinika-v-kotoroj-komfortno/ https://leoklinika.ru/
+Redirect 301 /2019/09/25/italo-rossijskij-aljans/ https://leoklinika.ru/
+Redirect 301 /2020/09/02/fotodinamicheskaya-lazernaya-terapiya/ https://leoklinika.ru/
+Redirect 301 /author/admin/page/2/ https://leoklinika.ru/
+Redirect 301 /glavnaja-2/ https://leoklinika.ru/
+Redirect 301 /2019/09/12/podgotovka-k-ultrazvukovomu-issled/ https://leoklinika.ru/
+Redirect 301 /2020/01/17/tatyana-leonidova-ob-onkologii-v-perm/ https://leoklinika.ru/
+Redirect 301 /2023/02/14/nederzhanie-mochi-delikatnaya-problema-kotoruyu-my-mozhem-reshit/ https://leoklinika.ru/
+Redirect 301 /2025/04/22/torzhestvennoe-otkrytie-kliniki-leonidovyh/ https://leoklinika.ru/
+Redirect 301 /shkola/ https://leoklinika.ru/
+Redirect 301 /ehsteticheskaya-ginekologiya/fototerapiya/ https://leoklinika.ru/services/procedury/fotodinamicheskaya-terapiya
+Redirect 301 /author/admin/page/4/ https://leoklinika.ru/
+Redirect 301 /2024/12/28/tretya-ezhegodnaya-konferencziya-po-fotodinamicheskoj-terapii/ https://leoklinika.ru/
+Redirect 301 /sign-up/ https://leoklinika.ru/
+Redirect 301 /1807-2/ https://leoklinika.ru/
+Redirect 301 /2025/02/26/dorogie-paczienty-napominaem-chto-u-kliniki-leonidovyh-novyj-logotip/ https://leoklinika.ru/
+Redirect 301 /2022/06/19/s-dnem-mediczinskogo-rabotnika/ https://leoklinika.ru/
+Redirect 301 /2025/03/26/programma-normalizaczii-vesa-s-endokrinologom/ https://leoklinika.ru/
+Redirect 301 /akcii/2uzipoceneodnogo/ https://leoklinika.ru/
+Redirect 301 /2019/10/07/floraljuks-innovacionnyj-metabiotik/ https://leoklinika.ru/
+Redirect 301 /category/bez-rubriki/ https://leoklinika.ru/
+Redirect 301 /2019/07/12/zhidkostnaja-citologija-citologichesko/ https://leoklinika.ru/
+Redirect 301 /author/admin/ https://leoklinika.ru/
+Redirect 301 /2019/10/16/o-svjazi-onkologii-i-sanatornogo-lechenija/ https://leoklinika.ru/
+Redirect 301 /obuchenie-vrachej/ https://leoklinika.ru/
+Redirect 301 /category/novosti/ https://leoklinika.ru/blog
+Redirect 301 /2024/12/28/vstrecha-biznes-kluba-ideya/ https://leoklinika.ru/
+Redirect 301 /2019/07/19/vakcinacija-ot-raka/ https://leoklinika.ru/
+Redirect 301 /2020/11/11/luchshij-vrach-v-svoej-speczialnosti/ https://leoklinika.ru/
+Redirect 301 /2019/08/31/kratko-ob-onkomarkerah/ https://leoklinika.ru/
+Redirect 301 /priem-onkologa/ https://leoklinika.ru/services/otdelenie-konsultativnyh-priemov-vrachei/onkolog
+Redirect 301 /2025/02/26/novoe-v-klinike-leonidovyh-rabota-s-mis-medlok-i-mobilnoe-prilozhenie-medtochka/ https://leoklinika.ru/
+Redirect 301 /2025/02/03/my-pereehali-na-novyj-adres/ https://leoklinika.ru/
+Redirect 301 /2024/12/28/1817/ https://leoklinika.ru/
+Redirect 301 /blog/page/3/ https://leoklinika.ru/
+Redirect 301 /2021/09/13/po-itogam-15-yubilejnoj-konferencii-reproduktivnyj-potencial-rossii/ https://leoklinika.ru/
+Redirect 301 /blog/page/4/ https://leoklinika.ru/
+Redirect 301 /politika-konfidencialnosti/ https://leoklinika.ru/
+Redirect 301 /2024/11/23/nauchno-prakticheskaya-mezhdunarodnaya-konferencziya-fotodinamicheskaya-lazernaya-terapiya-v-lechenii-i-profilaktike-onkopatologii-vozmozhnosti-profilaktiki-i-reabilitaczii-vpch-assocziirova/ https://leoklinika.ru/
+Redirect 301 /author/admin/page/3/ https://leoklinika.ru/
+Redirect 301 /2025/04/12/klinika-leonidovyh-predstavila-innovaczionnyj-proekt-po-profilaktike-raka-shejki-matki-na-mezhdunarodnoj-konferenczii-v-novosibirske/ https://leoklinika.ru/
+Redirect 301 /2019/08/02/chto-takoe-jendometrioz/ https://leoklinika.ru/
+Redirect 301 /%D1%83%D1%81%D0%BB%D1%83%D0%B3%D0%B8/ https://leoklinika.ru/
+Redirect 301 /fotodinamicheskaya-terapiya-test/ https://leoklinika.ru/
+Redirect 301 /2023/03/30/klinika-goda-2022/ https://leoklinika.ru/
+Redirect 301 /2025/01/21/klinika-leonidovyh-onkoperm-vnov-priznana-odnoj-i-luchshih-klinik-regiona/ https://leoklinika.ru/
+Redirect 301 /category/poleznaya-informacziya/ https://leoklinika.ru/
+Redirect 301 /blog/page/2/ https://leoklinika.ru/
+Redirect 301 /2020/06/18/gost-v-programme-bez-posrednikov/ https://leoklinika.ru/
+Redirect 301 /2019/10/23/o-rake-molochnoj-zhelezy/ https://leoklinika.ru/
+Redirect 301 /glavnaja/uslugi/ https://leoklinika.ru/services
+Redirect 301 /category/novosti/page/2/ https://leoklinika.ru/
+Redirect 301 /2020/05/30/mysvami/ https://leoklinika.ru/
+Redirect 301 /category/novosti/page/3/ https://leoklinika.ru/
+Redirect 301 /2019/09/07/o-vitaminah-i-bane/ https://leoklinika.ru/
+Redirect 301 /klinika-leonidovyh-onkoperm-vnov-priznana-odnoj-i-luchshih-klinik-regiona/ https://leoklinika.ru/
+Redirect 301 /2019/08/17/eshhe-raz-o-molochnoj-zheleze/ https://leoklinika.ru/
+Redirect 301 /wp-content/uploads/2024/11/program_10-12-2024_perm.pdf https://leoklinika.ru/
+Redirect 301 /author/daniil/ https://leoklinika.ru/
+Redirect 301 /patologiya-shejki-matki https://leoklinika.ru/services/diagnostik%D0%B0/diagnostika-patologii-sheiki-matki-i-vulvy-100

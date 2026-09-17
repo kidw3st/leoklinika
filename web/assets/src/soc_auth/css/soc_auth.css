@@ -1,0 +1,15 @@
+.soc_auth_list {
+    font-size: 0;
+}
+
+.soc_auth_list a {
+    display: inline-block;
+    margin: 0 3px;
+    width: 32px;
+    height: 32px;
+    background: url(../img/icons.png) no-repeat;
+}
+
+.soc_auth_list a.vk { background-position: 0 -36px; }
+.soc_auth_list a.fb { background-position: 0 -138px; }
+.soc_auth_list a.google { background-position: 0 -206px; }

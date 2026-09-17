@@ -1,0 +1,1 @@
+<?=$this->render('string_input', ['model' => $model, 'field' => $field, 'attribute' => $attribute, 'options' => $options])?>

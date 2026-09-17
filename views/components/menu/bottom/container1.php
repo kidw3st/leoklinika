@@ -1,0 +1,1 @@
+<ul class="footer__menu footer__menu_navigation"><?=$content?></ul>

@@ -1,0 +1,262 @@
+stages:
+  - prepare
+  - down
+  - build
+  - up
+  - deploy
+
+Clean prod:
+  stage: prepare
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       docker system prune -af --volumes
+       "
+    - echo "success"
+  only:
+    - master
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Pull prod:
+  stage: prepare
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       git checkout . &&
+       git pull
+       "
+    - echo "success"
+  only:
+    - master
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Down prod:
+  stage: down
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       docker-compose down
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      changes:
+        - docker/php/php.ini
+        - docker/nginx/templates/*
+        - docker/mysql/config/custom.cnf
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Build prod:
+  stage: build
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       docker-compose build --no-cache
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      changes:
+        - docker/php/Dockerfile
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Up prod:
+  stage: up
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       docker-compose -f docker-compose.back.yml up -d
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
+      changes:
+        - docker/php/php.ini
+        - docker/nginx/templates/*
+        - docker/mysql/config/custom.cnf
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Deploy prod:
+  stage: deploy
+  script:
+    - ssh -t $REMOTE_USER_PROD@$IP_PROD "
+       cd $WORK_DIR_PROD &&
+       docker exec php-fpm php yii migrate --interactive=0 &&
+       docker exec php-fpm php yii cache/flush-all
+       "
+    - echo "success"
+  only:
+    - master
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_PROD >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+
+
+
+
+Clean dev:
+  stage: prepare
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       docker system prune -af --volumes
+       "
+    - echo "success"
+  only:
+    - dev
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Pull dev:
+  stage: prepare
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       git checkout . &&
+       git pull
+       "
+    - echo "success"
+  only:
+    - dev
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Down dev:
+  stage: down
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       docker-compose down
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "dev"'
+      changes:
+        - docker/php/php.ini
+        - docker/nginx/templates/*
+        - docker/mysql/config/custom.cnf
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Build dev:
+  stage: build
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       docker-compose build --no-cache
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "dev"'
+      changes:
+        - docker/php/Dockerfile
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Up dev:
+  stage: up
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       docker-compose -f docker-compose.back.yml up -d
+       "
+    - echo "success"
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "dev"'
+      changes:
+        - docker/php/php.ini
+        - docker/nginx/templates/*
+        - docker/mysql/config/custom.cnf
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+Deploy dev:
+  stage: deploy
+  script:
+    - ssh -t $REMOTE_USER_DEV@$IP_DEV "
+       cd $WORK_DIR_DEV &&
+       docker exec php-fpm php yii migrate --interactive=0 &&
+       docker exec php-fpm php yii cache/flush-all
+       "
+    - echo "success"
+  only:
+    - dev
+  before_script:
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client git -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_DEV" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $IP_DEV >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts

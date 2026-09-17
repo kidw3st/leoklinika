@@ -1,0 +1,1 @@
+<ul class="header__menu__list"><?=$content?></ul>

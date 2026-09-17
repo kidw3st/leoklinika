@@ -1,0 +1,29 @@
+<?php
+namespace app\models;
+
+use Yii;
+use app\models\parents\RequestVacancyParent;
+
+class RequestVacancy extends RequestVacancyParent
+{
+    public function attributeLabels()
+    {
+        return array_merge(parent::attributeLabels(), [
+        
+        ]);
+    }
+    
+    public function rules()
+    {
+        return array_merge(parent::rules(), [
+        
+        ]);
+    }
+
+    public static function getOptions($model = false)
+    {
+        $res = parent::getOptions($model);
+
+        return $res;
+    }
+}
