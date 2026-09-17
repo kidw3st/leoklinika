@@ -1,0 +1,1 @@
+const bviInstance=new isvek.Bvi({target:".header__bvi",fontSize:17,images:!0,builtElements:!0,lang:"ru-RU"});
